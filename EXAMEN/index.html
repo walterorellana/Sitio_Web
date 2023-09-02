@@ -124,7 +124,7 @@
     <!-- Custom styles for this template -->
     <link href="./assets/blog.css" rel="stylesheet">
     <script src="bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/./Js/CallAjax.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./Js/CallAjax.js"></script>
 </head>
 
@@ -133,17 +133,33 @@
         <a class="navbar-brand" href="#">Desarollo Web</a>
         <div class="input-group mb-3">
 
-            <button type="button" onclick="LLamada1();" class="btn btn-secondary">Secondary</button>
+            <button type="button" onclick="LLamada2();" class="btn btn-secondary">Secondary</button>
             <select id="cmbUbication" class="form-select" aria-label="Example select with button addon">
-                <option value="999">El progreso</option>
-                <option value="201">Guastatoya</option>
-                <option value="202">Morazan</option>
-                <option value="203">San Agustin</option>
-                <option value="204">San Cristoval</option>
-                <option value="205">El jicaro</option>
-                <option value="206">Sansare</option>
-                <option value="207">Sanarate</option>
-                <option value="208">San Antonio</option>
+                <a href=""value="1">Guatemala</a>
+                <option value="1">Guatemala</option>
+                <option value="2">El Progreso</option>
+                <option value="3">Sacatep</option>
+                <option value="4">Chimaltenango</option>
+                <option value="5">Escuintla</option>
+                <option value="6">Santa Rosa</option>
+                <option value="7">Solola</option>
+                <option value="8">Totonicapán</option>
+                <option value="9">Quetzaltenango</option>
+                <option value="10">Suchitepéquez</option>
+                <option value="11">Retalhuleu</option>
+                <option value="12">San Marcos</option>
+                <option value="13">Huehuetenango</option>
+                <option value="14">Quiché</option>
+                <option value="15">Baja Verapaz</option>
+                <option value="16">Alta Verapaz</option>
+                <option value="17">Petén</option>
+                <option value="18">Izabal</option>
+                <option value="19">Zacapa</option>
+                <option value="20">Chiquimula</option>
+                <option value="21">Jalapa</option>
+                <option value="22">Jutiapa</option>
+                <!-- <option value="23">San Antonio</option> -->
+                <!-- <option value="24">San Antonio</option> -->
             </select>
             <!--<button type="button" onclick="LLamada1();" class="btn btn-secondary">Secondary</button>-->
         </div>
@@ -177,8 +193,8 @@
         </div>-->
 
     </div>
-    <div class="center-container">
-        <img src="Elprogresomap.jpg" alt="Mi Imagen">
+    <div style="width: 400px; margin: auto;">
+        <canvas id="myDoughnutChart"></canvas>
     </div>
 
     <footer class="col text-bg-light p-3">
@@ -186,6 +202,7 @@
             <p>&copy; 2023 DESARROLLO WEB - 22023-1890-036-A. Walter Antonio Orellana Beltetón.</p>
         </div>
     </footer>
+
 </body>
 
 
