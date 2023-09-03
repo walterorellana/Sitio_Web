@@ -1,49 +1,9 @@
 
 let myDoughnutChart;
+let myDoughnutChartt;
 LLamada2();
 
-
 // var url = "https://censopoblacion.gt/indicadores/2/999";
-
-
-// fetch(url)
-//   .then((response) => response.json())
-//   .then((data) => {
-//     console.log(data);
-//     const hombresElement = document.getElementById("Tsm");
-//     var mujeresElement = document.getElementById("Tsf");
-//     var age014Element = document.getElementById("age14");
-//     var age1564Element = document.getElementById("age15");
-//     var age65PlusElement = document.getElementById("age65");
-
-//     hombresElement.innerText = "Hombres: " + data[0].total_sexo_hombre;
-//     mujeresElement.innerText = "Mujeres: " + data[0].total_sexo_mujeres;
-//     age014Element.innerText = "0-14 años: " + data[0].pob_edad_014;
-//     age1564Element.innerText = "15-64 años: " + data[0].pob_edad_1564;
-//     age65PlusElement.innerText = "65 y más años: " + data[0].pob_edad_65;
-
-//     drawPieChart();
-//   });
-
-//   function drawPieChart() {
-//     var data = google.visualization.arrayToDataTable([
-//         ['Edad', 'Cantidad'],
-//         ['14 años o menos', parseInt(document.getElementById('age14').innerText.split(":")[1].trim())],
-//         ['15 años', parseInt(document.getElementById('age15').innerText.split(":")[1].trim())],
-//         ['65 años o más', parseInt(document.getElementById('age65').innerText.split(":")[1].trim())]
-//     ]);
-
-//     var options = {
-//         title: 'Distribución por edad',
-//         pieHole: 0.4,
-//     };
-
-//     var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
-//     chart.draw(data, options);
-// }
-
-
-
 
 function LLamada1() {
   var cmbUbication = document.getElementById("cmbUbication");
@@ -84,7 +44,8 @@ function LLamada2() {
   if (cmbUbication != null) {
     url =
       "https://censopoblacion.gt/indicadores/" +
-      (cmbUbication.value == "Mostrar Todos" ? "" : cmbUbication.value) + "/999";
+      (cmbUbication.value == "Mostrar Todos" ? "" : cmbUbication.value) +
+      "/999";
   } else {
     url = "https://censopoblacion.gt/indicadores/1/999";
   }
@@ -99,32 +60,52 @@ function LLamada2() {
       var age1564Element = document.getElementById("age15");
       var age65PlusElement = document.getElementById("age65");
 
+      var extraPlusElement = document.getElementById("extra");
+      var gariPlusElement = document.getElementById("gari");
+      var ladiPlusElement = document.getElementById("ladi");
+      var mayaPlusElement = document.getElementById("maya");
+      var xincaPlusElement = document.getElementById("xinca");
+      var ruralPlusElement = document.getElementById("rural");
+
       hombresElement.innerText = "Hombres: " + data[0].total_sexo_hombre;
       mujeresElement.innerText = "Mujeres: " + data[0].total_sexo_mujeres;
       age014Element.innerText = "0-14 años: " + data[0].pob_edad_014;
       age1564Element.innerText = "15-64 años: " + data[0].pob_edad_1564;
       age65PlusElement.innerText = "65 y más años: " + data[0].pob_edad_65;
 
+      extraPlusElement.innerText =
+        "extranjero: " + data[0].pob_pueblo_extranjero;
+      gariPlusElement.innerText = "garifuna: " + data[0].pob_pueblo_garifuna;
+      ladiPlusElement.innerText = "ladino: " + data[0].pob_pueblo_ladino;
+      mayaPlusElement.innerText = "maya: " + data[0].pob_pueblo_maya;
+      xincaPlusElement.innerText = "xinca: " + data[0].porc_pueblo_xinca;
+      ruralPlusElement.innerText = "rural: " + data[0].porc_sector_rural;
+
       grafica(data[0].total_sexo_hombre, data[0].total_sexo_mujeres);
+      grafica1(
+        data[0].pob_pueblo_extranjero,
+        data[0].pob_pueblo_garifuna,
+        data[0].pob_pueblo_ladino,
+        data[0].pob_pueblo_maya,
+        data[0].porc_pueblo_xinca,
+        data[0].porc_sector_rural
+      );
     });
 }
 
-
-
 function grafica(hombres, mujeres) {
-  const ctx = document.getElementById('myDoughnutChart').getContext('2d');
+  const ctx = document.getElementById("myDoughnutChart").getContext("2d");
 
   const data = {
-    labels: ['Hombres', 'Mujeres'],
-    datasets: [{
-      label: 'Población por género',
-      data: [hombres, mujeres],
-      backgroundColor: [
-        'rgb(54, 162, 235)',
-        'rgb(255, 99, 132)',
-      ],
-      hoverOffset: 4
-    }]
+    labels: ["Hombres", "Mujeres"],
+    datasets: [
+      {
+        label: "Población por género",
+        data: [hombres, mujeres],
+        backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+        hoverOffset: 4,
+      },
+    ],
   };
 
   const options = {
@@ -133,15 +114,52 @@ function grafica(hombres, mujeres) {
   };
 
   if (myDoughnutChart) {
-    // Si la instancia de la gráfica ya existe, actualiza los datos y la gráfica
     myDoughnutChart.data.datasets[0].data = [hombres, mujeres];
-    myDoughnutChart.update(); // Actualiza la gráfica con los nuevos datos
+    myDoughnutChart.update();
   } else {
-    // Si la instancia de la gráfica no existe, crea una nueva instancia
     myDoughnutChart = new Chart(ctx, {
-      type: 'doughnut',
+      type: "doughnut",
       data: data,
-      options: options
+      options: options,
+    });
+  }
+}
+
+function grafica1(extranjero, garifuna, latino) {
+  const ctx = document.getElementById("myDoughnutChartt").getContext("2d");
+
+  const data = {
+    labels: ["extranjero", "garifuna", "latino"],
+    datasets: [
+      {
+        label: "Población por género",
+        data: [extranjero, garifuna, latino],
+        backgroundColor: [
+          "rgb(54, 162, 235)",
+          "rgb(255, 99, 132)",
+          "rgb(0, 128, 0)",
+          "rgb(255, 255, 0)",
+          "rgb(128, 128, 128)",
+          "rgb(128, 0, 128)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+
+  if (myDoughnutChartt) {
+    myDoughnutChartt.data.datasets[0].data = [extranjero, garifuna, latino];
+    myDoughnutChartt.update();
+  } else {
+    myDoughnutChartt = new Chart(ctx, {
+      type: "doughnut",
+      data: data,
+      options: options,
     });
   }
 }
